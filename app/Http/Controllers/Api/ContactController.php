@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\ContactRequest;
 use Illuminate\Http\Request;
 use App\Services\ContactService;
 use App\Http\Controllers\Controller;
@@ -29,5 +30,12 @@ class ContactController extends Controller
         );
 
         return ContactResource::collection($contacts);
+    }
+
+    public function store(ContactRequest $request): JsonResource
+    {
+        $contact = $this->contactService->save($request->validated());
+
+        return new ContactResource($contact);
     }
 }
