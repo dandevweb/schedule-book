@@ -3,7 +3,7 @@
         <a class="navbar-brand" href="{{ route('dashboard') }}">
             {{ __('Dashboard') }}
         </a>
-        <a class="navbar-brand" href="{{ route('dashboard') }}">
+        <a class="navbar-brand" href="{{ route('contacts') }}">
             Contatos
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
