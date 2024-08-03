@@ -8,7 +8,7 @@
                         <input class="form-control" wire:model.live='search' type="search"
                             placeholder="Faça uma busca...">
                     </div>
-                    <a href="" class="btn btn-primary">Criar novo</a>
+                    <a href="{{ route('contacts.form') }}" class="btn btn-primary">Criar novo</a>
                 </div>
                 <div class="card-body pb-0">
                     <table class="table">
@@ -29,7 +29,8 @@
                                     <td>{{ $contact->phone }}</td>
                                     <td>{{ $contact->city }}</td>
                                     <td>
-                                        <a href="" class="btn btn-warning">Editar</a>
+                                        <a href="{{ route('contacts.form', $contact) }}"
+                                            class="btn btn-warning">Editar</a>
                                         <a href="" class="btn btn-danger">Excluir</a>
                                     </td>
                                 </tr>

@@ -9,11 +9,11 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        User::factory()->hasContacts(30)->create([
+        User::factory()->withContacts(50)->create([
             'name'  => 'Test User',
             'email' => 'test@example.com',
         ]);
 
-        User::factory(10)->hasContacts(30)->create();
+        User::factory(10)->withContacts(20)->create();
     }
 }
