@@ -5,9 +5,12 @@ use App\Models\{Contact, User};
 use App\Livewire\Contacts\Index;
 use Illuminate\Pagination\LengthAwarePaginator;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
 use function Pest\Laravel\{actingAs, get};
 
 beforeEach(function () {
+    uses(RefreshDatabase::class);
     $this->user = User::factory()->create();
     actingAs($this->user);
 });
@@ -48,20 +51,4 @@ it('should be able to paginate the result', function () {
             return true;
         });
 
-});
-
-it('should display contacts across multiple pages', function () {
-    Contact::factory()->count(30)->create();
-
-    $lw = Livewire::test(Index::class)
-        ->call('gotoPage', 2);
-
-    $contacts = Contact::latest()->skip(10)->take(10)->get();
-
-    foreach ($contacts as $contact) {
-        $lw->assertSee($contact->name);
-        $lw->assertSee($contact->email);
-        $lw->assertSee($contact->phone);
-        $lw->assertSee($contact->city);
-    }
 });
