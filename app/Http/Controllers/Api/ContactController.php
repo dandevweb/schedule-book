@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\ContactRequest;
-use Illuminate\Http\Request;
+use Illuminate\Http\{Request, Response};
 use App\Services\ContactService;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ContactRequest;
 use App\Http\Resources\ContactResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -51,5 +51,12 @@ class ContactController extends Controller
         $contact = $this->contactService->save(['id' => $id, ...$request->validated()]);
 
         return new ContactResource($contact);
+    }
+
+    public function destroy(int $id): Response
+    {
+        $this->contactService->delete($id);
+
+        return response()->noContent();
     }
 }
