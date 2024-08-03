@@ -33,6 +33,10 @@ class ContactService
         $id = $data['id'] ?? null;
         unset($data['id']);
 
+        if($id) {
+            Contact::findOrFail($id);
+        }
+
         return Contact::updateOrCreate([
             'id' => $id
         ], $data);

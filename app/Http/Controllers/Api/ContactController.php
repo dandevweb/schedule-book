@@ -45,4 +45,11 @@ class ContactController extends Controller
 
         return new ContactResource($contact);
     }
+
+    public function update(ContactRequest $request, int $id): JsonResource
+    {
+        $contact = $this->contactService->save(['id' => $id, ...$request->validated()]);
+
+        return new ContactResource($contact);
+    }
 }
