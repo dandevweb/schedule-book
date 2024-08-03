@@ -1,17 +1,20 @@
 <?php
 
-use App\Models\User;
 use Livewire\Livewire;
+use App\Models\{Contact, User};
 use App\Livewire\Contacts\Form;
 
 use function Pest\Laravel\{actingAs, assertDatabaseHas};
 
 beforeEach(function () {
     actingAs(User::factory()->create());
+    $this->contact = Contact::factory()->create([
+        'user_id' => user()->id,
+    ]);
 });
 
 it('should be able to create a contact', function () {
-    Livewire::test(Form::class)
+    Livewire::test(Form::class, ['contact' => $this->contact])
         ->set('name', 'John Doe')
         ->assertPropertyWired('name')
         ->set('email', 'john@doe.com')
@@ -37,6 +40,7 @@ it('should be able to create a contact', function () {
         ->assertHasNoErrors();
 
     assertDatabaseHas('contacts', [
+        'id'           => $this->contact->id,
         'user_id'      => user()->id,
         'name'         => 'John Doe',
         'email'        => 'john@doe.com',
@@ -54,6 +58,7 @@ it('should be able to create a contact', function () {
 describe('validations', function () {
     test('name should required', function ($rule, $value) {
         Livewire::test(Form::class)
+         ->set('contact', $this->contact)
             ->set('name', $value)
             ->call('save')
             ->assertHasErrors(['name' => $rule]);
@@ -64,6 +69,7 @@ describe('validations', function () {
 
     test('email should required', function ($rule, $value) {
         Livewire::test(Form::class)
+         ->set('contact', $this->contact)
             ->set('email', $value)
             ->call('save')
             ->assertHasErrors(['email' => $rule]);
@@ -74,6 +80,7 @@ describe('validations', function () {
 
     test('phone should required', function ($rule, $value) {
         Livewire::test(Form::class)
+         ->set('contact', $this->contact)
             ->set('phone', $value)
             ->call('save')
             ->assertHasErrors(['phone' => $rule]);
@@ -83,6 +90,7 @@ describe('validations', function () {
 
     test('zip_code should required', function ($rule, $value) {
         Livewire::test(Form::class)
+         ->set('contact', $this->contact)
             ->set('zip_code', $value)
             ->call('save')
             ->assertHasErrors(['zip_code' => $rule]);
@@ -93,6 +101,7 @@ describe('validations', function () {
 
     test('address should required', function ($rule, $value) {
         Livewire::test(Form::class)
+         ->set('contact', $this->contact)
             ->set('address', $value)
             ->call('save')
             ->assertHasErrors(['address' => $rule]);
@@ -103,6 +112,7 @@ describe('validations', function () {
 
     test('neighborhood should required', function ($rule, $value) {
         Livewire::test(Form::class)
+         ->set('contact', $this->contact)
             ->set('neighborhood', $value)
             ->call('save')
             ->assertHasErrors(['neighborhood' => $rule]);
@@ -112,6 +122,7 @@ describe('validations', function () {
 
     test('city should required', function ($rule, $value) {
         Livewire::test(Form::class)
+         ->set('contact', $this->contact)
             ->set('city', $value)
             ->call('save')
             ->assertHasErrors(['city' => $rule]);
@@ -122,6 +133,7 @@ describe('validations', function () {
 
     test('state should required', function ($rule, $value) {
         Livewire::test(Form::class)
+         ->set('contact', $this->contact)
             ->set('state', $value)
             ->call('save')
             ->assertHasErrors(['state' => $rule]);
