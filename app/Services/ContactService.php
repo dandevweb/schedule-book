@@ -15,4 +15,9 @@ class ContactService
             'id' => $id
         ], $data);
     }
+
+    public function delete(int $id): void
+    {
+        Contact::findOrFail($id)->delete();
+    }
 }

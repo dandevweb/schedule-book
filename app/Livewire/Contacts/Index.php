@@ -3,16 +3,21 @@
 namespace App\Livewire\Contacts;
 
 use App\Models\Contact;
-use Livewire\{Component, WithPagination};
 use Illuminate\View\View;
-use Livewire\Attributes\Computed;
+use App\Services\ContactService;
+use Livewire\Attributes\{Computed, On};
 use Illuminate\Database\Eloquent\Builder;
+use Livewire\{Component, WithPagination};
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class Index extends Component
 {
     use WithPagination;
+    use LivewireAlert;
+
     public ?string $search = null;
+    public ?int $modelId   = null;
 
     public function render(): View
     {
@@ -40,5 +45,19 @@ class Index extends Component
     public function updatedSearch(): void
     {
         $this->resetPage();
+    }
+
+    public function tryDelete(int $id): void
+    {
+        $this->modelId = $id;
+        $this->confirm('Tem certeza?', deleteOptions());
+    }
+
+    #[On('confirmed')]
+    public function delete(): void
+    {
+        (new ContactService())->delete($this->modelId);
+
+        $this->flash('success', 'Contato excluído com sucesso!', redirect: route('contacts'));
     }
 }

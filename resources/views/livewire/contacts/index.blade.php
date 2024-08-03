@@ -31,7 +31,8 @@
                                     <td>
                                         <a href="{{ route('contacts.form', $contact) }}"
                                             class="btn btn-warning">Editar</a>
-                                        <a href="" class="btn btn-danger">Excluir</a>
+                                        <button wire:click="tryDelete('{{ $contact->id }}')"
+                                            class="btn btn-danger">Excluir</button>
                                     </td>
                                 </tr>
                             @endforeach
