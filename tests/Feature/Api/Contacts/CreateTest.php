@@ -29,7 +29,6 @@ test('it can create a contact', function () {
         ->assertJsonStructure([
             'data' => [
                 'id',
-                'user_id',
                 'name',
                 'email',
                 'phone',
@@ -85,7 +84,6 @@ test('it returns correct json structure when creating a contact', function () {
         ->assertJsonStructure([
             'data' => [
                 'id',
-                'user_id',
                 'name',
                 'email',
                 'phone',

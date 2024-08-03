@@ -50,7 +50,6 @@ test('it can paginate contacts with correct json structure', function () {
             'data' => [
                 '*' => [
                     'id',
-                    'user_id',
                     'name',
                     'email',
                     'phone',
@@ -76,7 +75,6 @@ test('it can paginate contacts with correct json structure', function () {
             'data' => [
                 '*' => [
                     'id',
-                    'user_id',
                     'name',
                     'email',
                     'phone',
