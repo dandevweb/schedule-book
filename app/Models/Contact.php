@@ -10,4 +10,6 @@ class Contact extends Model
 {
     use HasFactory;
     use HasUser;
+
+    protected $hidden = ['user_id'];
 }

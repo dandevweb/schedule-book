@@ -38,6 +38,11 @@ class ContactService
         ], $data);
     }
 
+    public function find(int $id): Contact
+    {
+        return Contact::findOrFail($id);
+    }
+
     public function delete(int $id): void
     {
         Contact::findOrFail($id)->delete();

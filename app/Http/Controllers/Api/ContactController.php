@@ -38,4 +38,11 @@ class ContactController extends Controller
 
         return new ContactResource($contact);
     }
+
+    public function show(int $id): JsonResource
+    {
+        $contact = $this->contactService->find($id);
+
+        return new ContactResource($contact);
+    }
 }
