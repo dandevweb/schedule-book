@@ -33,27 +33,27 @@ Necessário sistema operacional macOS, Linux ou Windows (via [WSL2](https://docs
 Clone o projeto
 
 ```bash
-  git clone https://github.com/dandevweb/schedule-book.git
+git clone https://github.com/dandevweb/schedule-book.git
 
 ```
 
 Entre no diretório do projeto
 
 ```bash
-  cd schedule-book
+cd schedule-book
 
 ```
 
 Crie o arquivo .env a partir do arquivo .env.example
 
 ```bash
-  cp .env.example .env
+cp .env.example .env
 ```
 
 Com o Docker "startado", suba o container
 
 ```bash
-  docker run --rm \
+docker run --rm \
     -u "$(id -u):$(id -g)" \
     -v $(pwd):/var/www/html \
     -w /var/www/html \
@@ -64,43 +64,43 @@ Com o Docker "startado", suba o container
 Inicie o servidor
 
 ```bash
-  ./vendor/bin/sail up -d
+./vendor/bin/sail up -d
 ```
 
 Crie um alias para facilitar os comandos do Sail
 
 ```bash
-  alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
+alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
 ```
 
 Gere a chave da aplicação
 
 ```bash
-  sail artisan key:generate
+sail artisan key:generate
 ```
 
 Execute as migrations
 
 ```bash
-  sail artisan migrate
+sail artisan migrate
 ```
 
 Execute os seeders
 
 ```bash
-  sail artisan db:seed
+sail artisan db:seed
 ```
 
 Instale as dependências javascript
 
 ```bash
-  sail npm install
+sail npm install
 ```
 
 Compile os assets
 
 ```bash
-  sail npm run dev
+sail npm run dev
 ```
 
 Acesse o projeto em:
@@ -112,7 +112,7 @@ Acesse o projeto em:
 Para rodar os testes, execute o comando:
 
 ```bash
-  sail test
+sail test
 ```
 
 ## Usuário para login
